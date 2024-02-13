@@ -25,10 +25,7 @@ namespace WpfApp1
 
         public MainWindow()
         {
-            for (int i = 0; i < 200; i++)
-            {
-                Items.Add(new Object());
-            }
+            InitData(200);
 
             InitializeComponent();
         }
@@ -39,9 +36,40 @@ namespace WpfApp1
 
             Cursor = Cursors.Wait;
 
-            for (int columnIndex = 0; columnIndex < 200; ++columnIndex)
-            {
+            InitColumns(200);
 
+            grid.Visibility = Visibility.Visible;
+
+            Dispatcher.InvokeAsync(new Action(() =>
+            {
+                Cursor = null;
+            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Cursor = Cursors.Wait;
+            grid.Visibility = Visibility.Hidden;
+
+            Dispatcher.InvokeAsync(new Action(() =>
+            {
+                InitColumns(int.Parse((string)((ComboBoxItem)comboBox.SelectedItem).Content));
+                InitData(int.Parse((string)((ComboBoxItem)comboBox.SelectedItem).Content));
+
+                grid.Visibility = Visibility.Visible;
+                Dispatcher.InvokeAsync(new Action(() =>
+                {
+                    Cursor = null;
+                }), System.Windows.Threading.DispatcherPriority.Background);
+            }), System.Windows.Threading.DispatcherPriority.Background);
+        }
+
+        private void InitColumns(int count)
+        {
+            grid.Columns.Clear();
+
+            for (int columnIndex = 0; columnIndex < count; ++columnIndex)
+            {
                 var factory = new FrameworkElementFactory(typeof(Rectangle));
                 factory.SetValue(Rectangle.HeightProperty, 10.0);
                 factory.SetValue(Rectangle.WidthProperty, 10.0);
@@ -55,13 +83,16 @@ namespace WpfApp1
 
                 grid.Columns.Add(column);
             }
+        }
 
-            grid.Visibility = Visibility.Visible;
+        private void InitData(int count)
+        {
+            Items.Clear();
 
-            Dispatcher.InvokeAsync(new Action(() =>
+            for (int i = 0; i < count; i++)
             {
-                Cursor = null;
-            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle);
+                Items.Add(new Object());
+            }
         }
     }
 }

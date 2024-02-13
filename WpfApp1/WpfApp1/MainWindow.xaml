@@ -14,6 +14,20 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" TextElement.FontSize="20">
+            <TextBlock Text="列数"/>
+            <ComboBox x:Name="comboBox" Width="100" SelectedIndex="4">
+                <ComboBoxItem Content="10"/>
+                <ComboBoxItem Content="20"/>
+                <ComboBoxItem Content="30"/>
+                <ComboBoxItem Content="100"/>
+                <ComboBoxItem Content="200"/>
+                <ComboBoxItem Content="400"/>
+                <ComboBoxItem Content="640"/>
+            </ComboBox>
+            <Button Content="変更" Click="Button_Click"/>
+        </StackPanel>
+
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="DataGrid表示初期化中..." FontSize="20"/>
 
         <DataGrid x:Name="grid" Grid.Row="1" Margin="5" AutoGenerateColumns="False" Visibility="Collapsed"
