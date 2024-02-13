@@ -21,13 +21,13 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Object> Items { get; } = new ObservableCollection<Object>();
+        public ObservableCollection<Object> Items { get; private set; } = new ObservableCollection<Object>();
 
         public MainWindow()
         {
-            InitData(200);
-
             InitializeComponent();
+
+            InitData(200);
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -87,12 +87,16 @@ namespace WpfApp1
 
         private void InitData(int count)
         {
-            Items.Clear();
+            grid.ItemsSource = null;
 
+            var list = new List<object>();
             for (int i = 0; i < count; i++)
             {
-                Items.Add(new Object());
+                list.Add(new Object());
             }
+
+            Items = new ObservableCollection<object>(list);
+            grid.ItemsSource = Items;
         }
     }
 }
