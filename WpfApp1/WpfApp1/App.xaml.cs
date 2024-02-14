@@ -9,6 +9,12 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
+        public static Result ResultView { get; } = new Result();
+
+        public App()
+        {
+            ResultView.Show();
+        }
     }
 
 }

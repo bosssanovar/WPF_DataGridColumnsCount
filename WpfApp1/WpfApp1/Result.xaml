@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfApp1.Result"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Result" SizeToContent="WidthAndHeight"
+        Topmost="True" WindowStyle="None" ResizeMode="NoResize"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Background="LightGray">
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="測定結果" HorizontalAlignment="Center" Margin="5" FontSize="20"/>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition MinWidth="100"/>
+                <ColumnDefinition MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="行列数" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="遅い" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="速い" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="10" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="20" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="30" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="100" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="200" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="400" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="640" HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Slow10.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Slow20.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Slow30.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Slow100.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Slow200.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Slow400.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Slow640.Value}" d:Text="-" HorizontalAlignment="Center"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Fast10.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Fast20.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Fast30.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Fast100.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Fast200.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Fast400.Value}" d:Text="-" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Fast640.Value}" d:Text="-" HorizontalAlignment="Center"/>
+        </Grid>
+    </StackPanel>
+</Window>

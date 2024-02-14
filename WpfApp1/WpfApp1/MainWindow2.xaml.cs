@@ -19,13 +19,13 @@ namespace WpfApp1
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow2 : Window
     {
         private const int InitCulumnCount = 200;
 
         public ObservableCollection<Object> Items { get; private set; } = new ObservableCollection<Object>();
 
-        public MainWindow()
+        public MainWindow2()
         {
             InitializeComponent();
 
@@ -54,6 +54,7 @@ namespace WpfApp1
         {
             App.ResultView.StartMeasurementTime();
 
+
             Cursor = Cursors.Wait;
             grid.Visibility = Visibility.Hidden;
 
@@ -65,7 +66,7 @@ namespace WpfApp1
                 grid.Visibility = Visibility.Visible;
                 Dispatcher.InvokeAsync(new Action(() =>
                 {
-                    App.ResultView.EndMeasurementTimeSlow((string)((ComboBoxItem)comboBox.SelectedItem).Content);
+                    App.ResultView.EndMeasurementTimeFast((string)((ComboBoxItem)comboBox.SelectedItem).Content);
 
                     Cursor = null;
                 }), System.Windows.Threading.DispatcherPriority.Background);
@@ -74,52 +75,29 @@ namespace WpfApp1
 
         private void InitColumns(int count)
         {
-            grid.Columns.Clear();
+            grid.BeginInit();
 
-            for (int columnIndex = 0; columnIndex < count; ++columnIndex)
+            for (int i = 0; i < 640; i++)
             {
-                var factory = new FrameworkElementFactory(typeof(Rectangle));
-                factory.SetValue(Rectangle.HeightProperty, 10.0);
-                factory.SetValue(Rectangle.WidthProperty, 10.0);
-                factory.SetValue(Rectangle.FillProperty, Brushes.LightSkyBlue);
-
-                var dataTemplate = new DataTemplate();
-                dataTemplate.VisualTree = factory;
-
-                var column = new DataGridTemplateColumn();
-                column.CellTemplate = dataTemplate;
-
-                grid.Columns.Add(column);
+                grid.Columns[i].Visibility = (i < count) ? Visibility.Visible : Visibility.Collapsed;
             }
+
+            grid.EndInit();
         }
 
         private void InitData(int count)
         {
-            // バインドを切断
-            Binding b = new Binding("Items")
-            {
-                Source = null
-            };
-            grid.SetBinding(DataGrid.ItemsSourceProperty, b);
+            Items.Clear();
 
-            var list = new List<object>();
             for (int i = 0; i < count; i++)
             {
-                list.Add(new Object());
+                Items.Add(new Object());
             }
-
-            Items = new ObservableCollection<object>(list);
-
-            b = new Binding("Items")
-            {
-                Source = this
-            };
-            grid.SetBinding(DataGrid.ItemsSourceProperty, b);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var next = new MainWindow2();
+            var next = new MainWindow();
             next.Show();
 
             App.Current.MainWindow = next;
