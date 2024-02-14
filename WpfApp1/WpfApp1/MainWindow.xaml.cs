@@ -21,13 +21,15 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const int InitCulumnCount = 200;
+
         public ObservableCollection<Object> Items { get; private set; } = new ObservableCollection<Object>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            InitData(200);
+            InitData(InitCulumnCount);
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -36,7 +38,7 @@ namespace WpfApp1
 
             Cursor = Cursors.Wait;
 
-            InitColumns(200);
+            InitColumns(InitCulumnCount);
 
             grid.Visibility = Visibility.Visible;
 
